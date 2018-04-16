@@ -1,36 +1,35 @@
 import React, { Component } from 'react';
-import { SafeAreaView } from 'react-navigation';
 import {
   View,
   Text,
   Image,
-  ScrollView,
   StyleSheet,
-  ImageBackground,
+  ScrollView,
   TouchableNativeFeedback,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Avatar } from '../components';
+import { Avatar, Divider } from '../components';
 
 class SideMenu extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
         <View style={styles.card}>
-          <View style={styles.msgCard}>
-            <Avatar />
-            <Text style={styles.name}>
-              @Ayanami
-            </Text>
+          <Avatar />
+          <Text style={styles.name}>
+            @Ayanami
+          </Text>
+          <View style={{ paddingRight: 12 }}>
             <Text style={styles.intro}>
             《新世纪福音战士》简称《EVA》，
-             是日本GAINAX制作的原创电视动画作品，
-             由庵野秀明导演，共26话，于1995年在东京电视网首次播放。
+              是日本GAINAX制作的原创电视动画作品，
+              由庵野秀明导演，共26话，于1995年在东京电视网首次播放。
             </Text>
-            <Text>13 正在关注 0 关注着</Text>
           </View>
+          <Text style={styles.follow}>13 正在关注 0 关注着</Text>
         </View>
-        <SafeAreaView>
+        <Divider />
+        <View>
           <TouchableNativeFeedback>
             <View style={styles.option}>
               <Icon name="mode-edit" size={18} color="#999" />
@@ -71,11 +70,14 @@ class SideMenu extends Component {
               </Text>
             </View>
           </TouchableNativeFeedback>
-        </SafeAreaView>
+        </View>
+        
+        <Divider />
+
         <View style={styles.themes}>
           <TouchableNativeFeedback>
             <View>
-              <Icon name="wb-sunny" size={20} color="#999" />
+              <Icon name="wb-sunny" size={30} color="#999" />
             </View>
           </TouchableNativeFeedback>
         </View>
@@ -87,7 +89,6 @@ class SideMenu extends Component {
 const styles = StyleSheet.create({
   container:{
     flex: 1,
-    position: 'relative',
   },
   option: {
     flexDirection: 'row',
@@ -101,14 +102,12 @@ const styles = StyleSheet.create({
   },
   card: {
     justifyContent: 'center',
-    height: 230,
     paddingLeft: 20,
-    marginBottom: 10,
-    borderBottomWidth: 1,
-    borderColor: '#eee',
+    paddingTop: 20,
+    paddingBottom: 10,
   },
-  msgCard: {
-    bottom: 0,
+  follow: {
+    marginTop: 10,
   },
   name: {
     marginTop: 10,
@@ -119,10 +118,13 @@ const styles = StyleSheet.create({
   intro: {
     fontSize: 12,
     color: '#999',
-    lineHeight: 16
+    lineHeight: 16,
   },
   themes: {
-    flex: 1,
+    width: 30,
+    height: 30,
+    marginLeft: 20,
+    marginTop: 5,
   }
 })
 
