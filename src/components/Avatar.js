@@ -10,11 +10,12 @@ class Avatar extends Component {
   render() {
     const {
       size,
-      uri
+      uri,
+      onPress,
     } = this.props;
 
     return (
-      <TouchableNativeFeedback style={{ overflow: 'hidden' }}>
+      <TouchableNativeFeedback onPress={onPress} style={{ overflow: 'hidden' }}>
         <View style={{ width: size, height: size, borderRadius: size, overflow: 'hidden' }}>
           <Image
             style={{ width: size, height: size }}
@@ -28,11 +29,13 @@ class Avatar extends Component {
 Avatar.propTypes = {
   size: PropTypes.number,
   uri: PropTypes.string,
+  onPress: PropTypes.func,
 }
 
 Avatar.defaultProps = {
   size: 60,
   uri: 'https://blog.ayanami.ws/avatar.png',
+  onPress: () => {}
 }
 
 export default Avatar;

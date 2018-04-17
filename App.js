@@ -1,37 +1,37 @@
-import { DrawerLayoutAndroid } from 'react-native';
-import React, { Component } from 'react';
 import { StackNavigator } from 'react-navigation';
-import { SideMenu } from './src/containers';
-import { MainScreen } from './src/screens';
+import {
+  Favorites,
+  MainScreen,
+  PostDetails,
+  PersonalHomepage,
+  SystemSetting,
+  PersonalSetting,
+  DraftBox,
+} from './src/screens';
 
-class Demo extends Component {
-  render() {
-    return (
-      <View>
-        <Text>
-          系统设置
-        </Text>
-      </View>
-    )
-  }
-}
-
-const RootStack = StackNavigator({
-  'personSetting': {
+export default StackNavigator({
+  MainScreen: {
     screen: MainScreen,
+    navigationOptions: {
+      header: null,
+    }
   },
-  'systemSetting': {
-    screen: Demo,
-    routeName: '系统设置'
+  PostDetails: {
+    screen: PostDetails,
+  },
+  PersonalHomepage: {
+    screen: PersonalHomepage,
+  },
+  Favorites: {
+    screen: Favorites,
+  },
+  PersonalSetting: {
+    screen: PersonalSetting,
+  },
+  SystemSetting: {
+    screen: SystemSetting,
+  },
+  DraftBox: {
+    screen: DraftBox,
   },
 });
-
-export default () => (
-  <DrawerLayoutAndroid
-    drawerWidth={280}
-    drawerPosition={DrawerLayoutAndroid.positions.Left}
-    renderNavigationView={() => <SideMenu />}
-  >
-    <RootStack />
-  </DrawerLayoutAndroid>
-)

@@ -10,9 +10,11 @@ import { Avatar } from '../components';
 
 class MainHeader extends Component {
   render() {
+    const { openDrawer } = this.props;
+
     return (
       <View style={styles.container}>
-        <Avatar size={40} />
+        <Avatar size={40} onPress={openDrawer} />
         <Text style={styles.menuText}>
           首页
         </Text>

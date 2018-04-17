@@ -8,14 +8,18 @@ import {
   TouchableNativeFeedback,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { withNavigation } from 'react-navigation';
 import { Avatar, Divider } from '../components';
 
 class SideMenu extends Component {
   render() {
+    const { navigate } = this.props.navigation;
+    const { openDrawer } = this.props;
+
     return (
       <ScrollView style={styles.container}>
         <View style={styles.card}>
-          <Avatar />
+          <Avatar onPress={openDrawer} />
           <Text style={styles.name}>
             @Ayanami
           </Text>
@@ -30,7 +34,7 @@ class SideMenu extends Component {
         </View>
         <Divider />
         <View>
-          <TouchableNativeFeedback>
+          <TouchableNativeFeedback onPress={() => navigate('PersonalSetting')}>
             <View style={styles.option}>
               <Icon name="mode-edit" size={18} color="#999" />
               <Text style={styles.menu}>
@@ -38,11 +42,27 @@ class SideMenu extends Component {
               </Text>
             </View>
           </TouchableNativeFeedback>
-          <TouchableNativeFeedback>
+          <TouchableNativeFeedback onPress={() => navigate('Favorites')}>
             <View style={styles.option}>
               <Icon name="grade" size={18} color="#999" />
               <Text style={styles.menu}>
                 收藏夹
+              </Text>
+            </View>
+          </TouchableNativeFeedback>
+          <TouchableNativeFeedback onPress={() => navigate('DraftBox')}>
+            <View style={styles.option}>
+              <Icon name="folder" size={18} color="#999" />
+              <Text style={styles.menu}>
+                草稿箱
+              </Text>
+            </View>
+          </TouchableNativeFeedback>
+          <TouchableNativeFeedback onPress={() => navigate('SystemSetting')}>
+            <View style={styles.option}>
+              <Icon name="build" size={18} color="#999" />
+              <Text style={styles.menu}>
+                系统设置
               </Text>
             </View>
           </TouchableNativeFeedback>
@@ -51,22 +71,6 @@ class SideMenu extends Component {
               <Icon name="map" size={18} color="#999" />
               <Text style={styles.menu}>
                 周边动态
-              </Text>
-            </View>
-          </TouchableNativeFeedback>
-          <TouchableNativeFeedback>
-            <View style={styles.option}>
-              <Icon name="folder" size={18} color="#999" />
-              <Text style={styles.menu}>
-                草稿箱
-              </Text>
-            </View>
-          </TouchableNativeFeedback>
-          <TouchableNativeFeedback>
-            <View style={styles.option}>
-              <Icon name="build" size={18} color="#999" />
-              <Text style={styles.menu}>
-                系统设置
               </Text>
             </View>
           </TouchableNativeFeedback>
@@ -126,6 +130,8 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginTop: 5,
   }
-})
+});
 
-export default SideMenu;
+
+
+export default withNavigation(SideMenu);
