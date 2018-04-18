@@ -3,32 +3,51 @@ import {
   View,
   StyleSheet,
   Text,
-  TouchableNativeFeedback
+  TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { withNavigation } from 'react-navigation';
 import { Avatar } from '../components';
 
 class MainHeader extends Component {
   render() {
-    const { openDrawer } = this.props;
+    const {
+      openDrawer,
+      navigation,
+      jumpPager,
+      pager
+    } = this.props;
 
     return (
       <View style={styles.container}>
         <Avatar size={40} onPress={openDrawer} />
-        <Text style={styles.menuText}>
-          首页
-        </Text>
-        <Text style={styles.menuText}>
-          发现
-        </Text>
-        <Text style={styles.menuText}>
-          消息
-        </Text>
-        <TouchableNativeFeedback>
+
+        <TouchableOpacity activeOpacity={.5} onPress={() => jumpPager(0)}>
+          <Text style={[styles.menuText, pager === 0 && styles.active]}>
+            首页
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity activeOpacity={.5} onPress={() => jumpPager(1)}>
+          <Text style={[styles.menuText, pager === 1 && styles.active]}>
+            发现
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity activeOpacity={.5} onPress={() => jumpPager(2)}>
+          <Text style={[styles.menuText, pager === 2 && styles.active]}>
+            消息
+          </Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity
+          activeOpacity={.5}
+          onPress={() => navigation.navigate('EditPost')}
+        >
           <View>
             <Icon name="edit" size={25} color="#999" />
           </View>
-        </TouchableNativeFeedback>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -40,13 +59,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     height: 60,
-    borderBottomWidth: 1,
-    borderColor: '#ccc',
+    shadowRadius: 2,
     backgroundColor: '#fff',
   },
   menuText: {
     fontSize: 16,
+  },
+  active: {
+    color: 'blue',
   }
 });
 
-export default MainHeader;
+export default withNavigation(MainHeader);

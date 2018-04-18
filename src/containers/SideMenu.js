@@ -3,6 +3,7 @@ import {
   View,
   Text,
   Image,
+  Switch,
   StyleSheet,
   ScrollView,
   TouchableNativeFeedback,
@@ -78,10 +79,17 @@ class SideMenu extends Component {
         
         <Divider />
 
-        <View style={styles.themes}>
+        <View>
           <TouchableNativeFeedback>
-            <View>
-              <Icon name="wb-sunny" size={30} color="#999" />
+            <View style={styles.themes}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Icon name="wb-sunny" size={18} color="#999" />
+                <Text style={styles.menu}>
+                夜间模式
+                </Text>
+              </View>
+              
+              <Switch />
             </View>
           </TouchableNativeFeedback>
         </View>
@@ -125,10 +133,13 @@ const styles = StyleSheet.create({
     lineHeight: 16,
   },
   themes: {
-    width: 30,
-    height: 30,
-    marginLeft: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingLeft: 20,
+    paddingRight: 20,
     marginTop: 5,
+    height: 50,
   }
 });
 

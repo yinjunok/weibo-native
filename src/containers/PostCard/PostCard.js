@@ -5,8 +5,9 @@ import {
   StyleSheet,
   TouchableNativeFeedback
 } from 'react-native';
-import { Avatar } from '../components';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import styles from './styles';
+import { Avatar } from '../../components';
 
 class PostCard extends Component {
   render() {
@@ -41,7 +42,7 @@ class PostCard extends Component {
             <Icon size={18} name="comment-o" />
             <Text style={styles.iconText}>999</Text>
           </View>
-          <View style={styles.icon}>
+          <View style={[styles.icon, styles.iconNoBorder]}>
             <Icon size={18} name="share" />
             <Text style={styles.iconText}>999</Text>
           </View>
@@ -50,51 +51,5 @@ class PostCard extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    padding: 10,
-    margin: 5,
-    borderRadius: 5,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  name: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 2,
-  },
-  time: {
-    fontSize: 12,
-  },
-  author: {
-    marginLeft: 10,
-  },
-  content: {
-    marginTop: 12,
-    marginBottom: 12,
-  },
-  contentText: {
-    fontSize: 14,
-    lineHeight: 21,
-  },
-  operating: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    paddingBottom: 3,
-  },
-  icon: {
-    flexDirection: 'row',
-    marginLeft: 20,
-  },
-  iconText: {
-    fontSize: 12,
-    color: '#999',
-    marginLeft: 5,
-  }
-});
 
 export default PostCard;

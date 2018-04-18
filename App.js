@@ -1,17 +1,18 @@
 import { StackNavigator } from 'react-navigation';
 import {
   Favorites,
-  MainScreen,
-  PostDetails,
+  IndexScreen,
   PersonalHomepage,
   SystemSetting,
   PersonalSetting,
   DraftBox,
+  EditPost,
+  PostDetails
 } from './src/screens';
 
 export default StackNavigator({
   MainScreen: {
-    screen: MainScreen,
+    screen: IndexScreen,
     navigationOptions: {
       header: null,
     }
@@ -34,4 +35,10 @@ export default StackNavigator({
   DraftBox: {
     screen: DraftBox,
   },
+  EditPost: {
+    screen: EditPost,
+  },
+  PostDetails: {
+    screen: PostDetails,
+  }
 });

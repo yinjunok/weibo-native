@@ -8,12 +8,17 @@ import {
   DrawerLayoutAndroid,
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { MainHeader, SideMenu, PostCard } from '../containers';
+import HomePage from './HomePage';
+import { MainHeader, SideMenu, PostCard } from '../../containers';
 
-class MainScreen extends Component {
+class IndexScreen extends Component {
   constructor(props) {
     super(props);
     this.drawer = createRef();
+    this.pager = createRef();
+    this.state = {
+      pager: 0
+    }
   }
 
   openDrawer = () => {
@@ -22,6 +27,20 @@ class MainScreen extends Component {
 
   closeDrawer = () => {
     this.drawer.current.closeDrawer();
+  }
+
+  onPageSelected = e => {
+    this.setState({
+      pager: e.nativeEvent.position
+    })
+  }
+
+  jumpPager = page => {
+    // 顶部导航点击延迟的厉害
+    this.pager.current.setPage(page);
+    this.setState({
+      pager: page,
+    });
   }
 
   render () {
@@ -33,21 +52,25 @@ class MainScreen extends Component {
         renderNavigationView={() => <SideMenu closeDrawer={this.closeDrawer} />}
       >
         <View style={styles.container}>
-          <MainHeader openDrawer={this.openDrawer} />
+          <MainHeader
+            openDrawer={this.openDrawer}
+            pager={this.state.pager}
+            jumpPager={this.jumpPager}
+          />
           <ViewPagerAndroid
             style={styles.viewPager}
-            initialPage={0}
-            ref={node => this.pager = node}
+            onPageSelected={this.onPageSelected}
+            initialPage={this.state.pager}
+            ref={this.pager}
           >
-            <View key="1">
-              <PostCard />
-              <PostCard />
+            <View key="1" style={styles.viewPager}>
+              <HomePage />
             </View>
             <View key="2">
-              <Text>Second page</Text>
+              <HomePage />
             </View>
             <View key="3">
-              <Text>Third page</Text>
+              <HomePage />
             </View>
           </ViewPagerAndroid>
         </View>
@@ -59,11 +82,10 @@ class MainScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#fff',
   },
   viewPager: {
     flex: 1,
   }
 });
 
-export default withNavigation(MainScreen);
+export default withNavigation(IndexScreen);

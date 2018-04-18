@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
-class DraftBox extends Component {
+class EditPost extends Component {
   static navigationOptions = {
-    title: '草稿箱'
+    title: '编辑'
   }
 
   render() {
     return (
       <View>
         <Text>
-          草稿箱
+          编辑
         </Text>
       </View>
-    );
+    )
   }
 }
 
-export default DraftBox;
+export default EditPost;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Image,
   View,
-  TouchableNativeFeedback,
+  TouchableOpacity,
 } from 'react-native';
 
 class Avatar extends Component {
@@ -15,13 +15,13 @@ class Avatar extends Component {
     } = this.props;
 
     return (
-      <TouchableNativeFeedback onPress={onPress} style={{ overflow: 'hidden' }}>
+      <TouchableOpacity onPress={onPress} style={{ overflow: 'hidden' }} activeOpacity={.7}>
         <View style={{ width: size, height: size, borderRadius: size, overflow: 'hidden' }}>
           <Image
             style={{ width: size, height: size }}
             source={{ uri }} />
         </View>
-      </TouchableNativeFeedback>
+      </TouchableOpacity>
     );
   }
 }
