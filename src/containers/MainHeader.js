@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { withNavigation } from 'react-navigation';
 import { Avatar } from '../components';
 
 class MainHeader extends Component {
@@ -16,35 +17,35 @@ class MainHeader extends Component {
       jumpToIndex,
       index
     } = this.props;
-
+    console.log(navigation.navigate)
     return (
       <View style={styles.container}>
         <Avatar size={40} onPress={openDrawer} />
+        <View style={styles.menuContainer}>
+          <TouchableOpacity activeOpacity={.5} onPress={() => jumpToIndex(0)}>
+            <View style={styles.menu}>
+              <Text style={[styles.menuText, index === 0 && styles.active]}>
+                首页
+              </Text>
+            </View>
+          </TouchableOpacity>
 
-        <TouchableOpacity activeOpacity={.5} onPress={() => jumpToIndex(0)}>
-          <View style={styles.menu}>
-            <Text style={[styles.menuText, index === 0 && styles.active]}>
-              首页
-            </Text>
-          </View>
-        </TouchableOpacity>
+          <TouchableOpacity activeOpacity={.5} onPress={() => jumpToIndex(1)}>
+            <View style={styles.menu}>
+              <Text style={[styles.menuText, index === 1 && styles.active]}>
+                发现
+              </Text>
+            </View>
+          </TouchableOpacity>
 
-        <TouchableOpacity activeOpacity={.5} onPress={() => jumpToIndex(1)}>
-          <View style={styles.menu}>
-            <Text style={[styles.menuText, index === 1 && styles.active]}>
-              发现
-            </Text>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity activeOpacity={.5} onPress={() => jumpToIndex(2)}>
-          <View style={styles.menu}>
-            <Text style={[styles.menuText, index === 2 && styles.active]}>
-              消息
-            </Text>
-          </View>
-        </TouchableOpacity>
-        
+          <TouchableOpacity activeOpacity={.5} onPress={() => jumpToIndex(2)}>
+            <View style={styles.menu}>
+              <Text style={[styles.menuText, index === 2 && styles.active]}>
+                消息
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
         <TouchableOpacity
           activeOpacity={.5}
           onPress={() => navigation.navigate('EditPost')}
@@ -64,13 +65,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     height: 60,
-    shadowRadius: 2,
     backgroundColor: '#fff',
+  },
+  menuContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   menu: {
     flex: 1,
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingLeft: 15,
+    paddingRight: 15,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -83,4 +88,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MainHeader;
+export default withNavigation(MainHeader);
