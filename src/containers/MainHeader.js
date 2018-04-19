@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { withNavigation } from 'react-navigation';
 import { Avatar } from '../components';
 
 class MainHeader extends Component {
@@ -14,30 +13,36 @@ class MainHeader extends Component {
     const {
       openDrawer,
       navigation,
-      jumpPager,
-      pager
+      jumpToIndex,
+      index
     } = this.props;
 
     return (
       <View style={styles.container}>
         <Avatar size={40} onPress={openDrawer} />
 
-        <TouchableOpacity activeOpacity={.5} onPress={() => jumpPager(0)}>
-          <Text style={[styles.menuText, pager === 0 && styles.active]}>
-            首页
-          </Text>
+        <TouchableOpacity activeOpacity={.5} onPress={() => jumpToIndex(0)}>
+          <View style={styles.menu}>
+            <Text style={[styles.menuText, index === 0 && styles.active]}>
+              首页
+            </Text>
+          </View>
         </TouchableOpacity>
 
-        <TouchableOpacity activeOpacity={.5} onPress={() => jumpPager(1)}>
-          <Text style={[styles.menuText, pager === 1 && styles.active]}>
-            发现
-          </Text>
+        <TouchableOpacity activeOpacity={.5} onPress={() => jumpToIndex(1)}>
+          <View style={styles.menu}>
+            <Text style={[styles.menuText, index === 1 && styles.active]}>
+              发现
+            </Text>
+          </View>
         </TouchableOpacity>
 
-        <TouchableOpacity activeOpacity={.5} onPress={() => jumpPager(2)}>
-          <Text style={[styles.menuText, pager === 2 && styles.active]}>
-            消息
-          </Text>
+        <TouchableOpacity activeOpacity={.5} onPress={() => jumpToIndex(2)}>
+          <View style={styles.menu}>
+            <Text style={[styles.menuText, index === 2 && styles.active]}>
+              消息
+            </Text>
+          </View>
         </TouchableOpacity>
         
         <TouchableOpacity
@@ -62,12 +67,20 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     backgroundColor: '#fff',
   },
+  menu: {
+    flex: 1,
+    paddingLeft: 10,
+    paddingRight: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   menuText: {
     fontSize: 16,
+    color: '#666',
   },
   active: {
     color: 'blue',
   }
 });
 
-export default withNavigation(MainHeader);
+export default MainHeader;

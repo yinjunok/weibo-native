@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react';
+import React, { Component, createRef, createContext } from 'react';
 import {
   View,
   Text,
@@ -7,18 +7,68 @@ import {
   ViewPagerAndroid,
   DrawerLayoutAndroid,
 } from 'react-native';
-import { withNavigation } from 'react-navigation';
-import HomePage from './HomePage';
+import { withNavigation, TabNavigator  } from 'react-navigation';
+import HomeScreen from './HomeScreen';
+import MessageScreen from './MessageScreen';
+import DiscoveryScreen from './DiscoveryScreen';
 import { MainHeader, SideMenu, PostCard } from '../../containers';
 
-class IndexScreen extends Component {
+const DrawerContext  = createContext();
+
+class Screen2 extends Component {
+  render() {
+    return (
+      <View>
+        <PostCard />
+      </View>
+    )
+  }
+}
+
+class Screen3 extends Component {
+  render() {
+    return (
+      <View>
+        <PostCard />
+      </View>
+    )
+  }
+}
+
+const Screen = TabNavigator({
+  Home: {
+    screen: HomeScreen,
+  },
+  Discovery: {
+    screen: DiscoveryScreen,
+  },
+  Message: {
+    screen: MessageScreen,
+  },
+}, {
+  tabBarComponent: props => {
+    const { navigationState: { index }, jumpToIndex, navigation } = props;
+    return (
+      <DrawerContext.Consumer>
+        {
+          openDrawer =>  (
+            <MainHeader
+              index={index}
+              openDrawer={openDrawer}
+              navigation={navigation}
+              jumpToIndex={jumpToIndex}
+            />
+          )
+        }
+      </DrawerContext.Consumer>
+    )
+  },
+})
+
+class Drawer extends Component {
   constructor(props) {
     super(props);
     this.drawer = createRef();
-    this.pager = createRef();
-    this.state = {
-      pager: 0
-    }
   }
 
   openDrawer = () => {
@@ -29,21 +79,9 @@ class IndexScreen extends Component {
     this.drawer.current.closeDrawer();
   }
 
-  onPageSelected = e => {
-    this.setState({
-      pager: e.nativeEvent.position
-    })
-  }
-
-  jumpPager = page => {
-    // 顶部导航点击延迟的厉害
-    this.pager.current.setPage(page);
-    this.setState({
-      pager: page,
-    });
-  }
-
   render () {
+    const { Provider } = DrawerContext;
+
     return (
       <DrawerLayoutAndroid
         drawerWidth={280}
@@ -52,29 +90,21 @@ class IndexScreen extends Component {
         renderNavigationView={() => <SideMenu closeDrawer={this.closeDrawer} />}
       >
         <View style={styles.container}>
-          <MainHeader
-            openDrawer={this.openDrawer}
-            pager={this.state.pager}
-            jumpPager={this.jumpPager}
-          />
-          <ViewPagerAndroid
-            style={styles.viewPager}
-            onPageSelected={this.onPageSelected}
-            initialPage={this.state.pager}
-            ref={this.pager}
-          >
-            <View key="1" style={styles.viewPager}>
-              <HomePage />
-            </View>
-            <View key="2">
-              <HomePage />
-            </View>
-            <View key="3">
-              <HomePage />
-            </View>
-          </ViewPagerAndroid>
+          <Provider value={this.openDrawer}>
+            {this.props.children}
+          </Provider>
         </View>
       </DrawerLayoutAndroid>
+    )
+  }
+}
+
+class IndexScreen extends Component {
+  render() {
+    return (
+      <Drawer>
+        <Screen />
+      </Drawer>
     )
   }
 }

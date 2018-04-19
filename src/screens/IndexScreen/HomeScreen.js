@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { PostCard } from '../../containers';
 
-class HomePage extends Component {
+class HomeScreen extends Component {
   render() {
     return (
       <ScrollView style={styles.container} key="1">
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default HomePage;
+export default HomeScreen;
