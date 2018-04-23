@@ -17,7 +17,7 @@ class MainHeader extends Component {
       jumpToIndex,
       index
     } = this.props;
-    console.log(navigation.navigate)
+
     return (
       <View style={styles.container}>
         <Avatar size={40} onPress={openDrawer} />
