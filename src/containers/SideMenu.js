@@ -69,6 +69,14 @@ class SideMenu extends Component {
           </TouchableNativeFeedback>
           <TouchableNativeFeedback>
             <View style={styles.option}>
+              <Icon name="person-pin" size={18} color="#999" />
+              <Text style={styles.menu}>
+                关注的人
+              </Text>
+            </View>
+          </TouchableNativeFeedback>
+          <TouchableNativeFeedback>
+            <View style={styles.option}>
               <Icon name="map" size={18} color="#999" />
               <Text style={styles.menu}>
                 周边动态
@@ -138,7 +146,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 20,
     paddingRight: 20,
-    marginTop: 5,
     height: 50,
   }
 });

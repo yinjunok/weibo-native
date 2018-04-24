@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { Refresh } from '../components';
 
 class SystemSetting extends Component {
   static navigationOptions = {
@@ -12,6 +13,7 @@ class SystemSetting extends Component {
         <Text>
           系统设置
         </Text>
+        <Refresh />
       </View>
     )
   }

@@ -7,7 +7,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Divider } from '../components';
 
 class EditPost extends Component {
@@ -33,7 +33,7 @@ class EditPost extends Component {
         />
         <TouchableOpacity activeOpacity={.5}>
           <View style={styles.send}>
-            <Icon name="paper-plane-o" size={20} />
+            <Icon name="send" size={20} />
           </View>
         </TouchableOpacity>
         <Divider />
@@ -42,34 +42,34 @@ class EditPost extends Component {
           <ScrollView horizontal>
             <TouchableOpacity activeOpacity={.7}>
               <View style={styles.img}>
-                <Icon name="plus" size={40} />
+                <Icon name="add" size={40} />
               </View>
             </TouchableOpacity>
             <TouchableOpacity activeOpacity={.7}>
               <View style={styles.img}>
-                <Icon name="plus" size={40} />
+                <Icon name="add" size={40} />
               </View>
             </TouchableOpacity>
             <TouchableOpacity activeOpacity={.7}>
               <View style={styles.img}>
-                <Icon name="plus" size={40} />
+                <Icon name="add" size={40} />
               </View>
             </TouchableOpacity>
             <TouchableOpacity activeOpacity={.7}>
               <View style={styles.img}>
-                <Icon name="plus" size={40} />
+                <Icon name="add" size={40} />
               </View>
             </TouchableOpacity>
             <TouchableOpacity activeOpacity={.7}>
               <View style={styles.img}>
-                <Icon name="plus" size={40} />
+                <Icon name="add" size={40} />
               </View>
             </TouchableOpacity>
           </ScrollView>
       
           <TouchableOpacity activeOpacity={.7}>
             <View style={{ flexDirection: 'row', marginTop: 10 }}>
-              <Icon name="map" size={20} />
+              <Icon name="place" size={20} />
               <Text>定位规划中.....</Text>
             </View>
           </TouchableOpacity>
