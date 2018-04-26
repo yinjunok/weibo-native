@@ -7,7 +7,8 @@ import {
   PersonalSetting,
   DraftBox,
   EditPost,
-  PostDetails
+  PostDetails,
+  Following,
 } from './src/screens';
 
 export default StackNavigator({
@@ -40,5 +41,8 @@ export default StackNavigator({
   },
   PostDetails: {
     screen: PostDetails,
-  }
+  },
+  Following: {
+    screen: Following,
+  },
 });

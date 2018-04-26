@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     height: 60,
     backgroundColor: '#fff',
+    elevation: 4
   },
   menuContainer: {
     flexDirection: 'row',

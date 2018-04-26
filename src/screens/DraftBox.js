@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import {
+  View,
+  ScrollView,
+} from 'react-native';
+import { PostCard } from '../containers';
 
 class DraftBox extends Component {
   static navigationOptions = {
@@ -8,11 +12,15 @@ class DraftBox extends Component {
 
   render() {
     return (
-      <View>
-        <Text>
-          草稿箱
-        </Text>
-      </View>
+      <ScrollView style={{ flex: 1 }}>
+        <PostCard />
+        <PostCard />
+        <PostCard />
+        <PostCard />
+        <PostCard />
+        <PostCard />
+        <PostCard />
+      </ScrollView>
     );
   }
 }

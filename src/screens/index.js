@@ -6,3 +6,4 @@ export { default as Favorites } from './Favorites';
 export { default as PersonalSetting } from './PersonalSetting';
 export { default as DraftBox } from './DraftBox';
 export { default as EditPost } from './EditPost';
+export { default as Following } from './Following';

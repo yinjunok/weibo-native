@@ -67,7 +67,7 @@ class SideMenu extends Component {
               </Text>
             </View>
           </TouchableNativeFeedback>
-          <TouchableNativeFeedback>
+          <TouchableNativeFeedback onPress={() => navigate('Following')}>
             <View style={styles.option}>
               <Icon name="person-pin" size={18} color="#999" />
               <Text style={styles.menu}>

@@ -13,3 +13,19 @@ https://github.com/facebook/react-native/pull/4180 可以用 elevation 替代
 
 ## 让 float button 悬浮在 ScrollView 上
 https://reactnativecode.com/show-floating-action-button-above-listview/
+
+## 背景图组件 ImageBackground 文档里没有提到
+
+## Text 边距的问题
+
+```js
+<View style={{ padding: 15 }}>
+  <Text>
+    多行文字多行文
+    字多行文字
+  </Text>
+</View>
+```
+
+对拥有多行的 Text 组件, 使用 padding, margin 不管是在 Text 组件上, 还是在包裹它的 View 组件上使用, 
+会出现还有空余容纳文字的情况下, 文字折行.

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
-import { PostCard } from '../../containers';
+import { PostCard, BusinessCard } from '../../containers';
 import { Refresh } from '../../components';
 
 class HomeScreen extends Component {
@@ -8,6 +8,7 @@ class HomeScreen extends Component {
     return (
       <View style={{ flex: 1, zIndex: 1 }}>
         <ScrollView style={styles.container} key="1">
+          <BusinessCard />
           <PostCard />
           <PostCard />
           <PostCard />
