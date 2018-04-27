@@ -66,11 +66,6 @@ class BusinessCard extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 10,
-    borderRadius: 5,
-    elevation: 1
   },
   avatar: {
     marginTop: -35,

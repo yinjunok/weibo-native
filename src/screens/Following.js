@@ -13,13 +13,24 @@ class Following extends Component {
   render() {
     return (
       <ScrollView style={{ flex: 1 }}>
-        <BusinessCard />
-        <BusinessCard />
-        <BusinessCard />
-        <BusinessCard />
-        <BusinessCard />
-        <BusinessCard />
-        <BusinessCard />
+        <View style={{ margin: 10, marginBottom: 0 }}>
+          <BusinessCard />
+        </View>
+        <View style={{ margin: 10, marginBottom: 0 }}>
+          <BusinessCard />
+        </View>
+        <View style={{ margin: 10, marginBottom: 0 }}>
+          <BusinessCard />
+        </View>
+        <View style={{ margin: 10, marginBottom: 0 }}>
+          <BusinessCard />
+        </View>
+        <View style={{ margin: 10, marginBottom: 0 }}>
+          <BusinessCard />
+        </View>
+        <View style={{ margin: 10, marginBottom: 0 }}>
+          <BusinessCard />
+        </View>
       </ScrollView>
     )
   }

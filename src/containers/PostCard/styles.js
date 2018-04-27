@@ -5,10 +5,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     padding: 10,
-    marginTop: 10,
-    marginLeft: 10,
-    marginRight: 10,
-    borderRadius: 5,
   },
   header: {
     flexDirection: 'row',

@@ -6,11 +6,12 @@ import {
   StyleSheet,
   DrawerLayoutAndroid,
 } from 'react-native';
-import { withNavigation, TabNavigator  } from 'react-navigation';
+import { TabNavigator  } from 'react-navigation';
 import HomeScreen from './HomeScreen';
 import MessageScreen from './MessageScreen';
 import DiscoveryScreen from './DiscoveryScreen';
 import { MainHeader, SideMenu, PostCard } from '../../containers';
+import { RootNavigator } from '../../context';
 
 class IndexScreen extends Component {
   constructor(props) {
@@ -24,6 +25,12 @@ class IndexScreen extends Component {
 
   closeDrawer = () => {
     this.drawer.current.closeDrawer();
+  }
+
+  rootNavigator = (routeName) => {
+    const { navigate } = this.props.navigation;
+    console.log(routeName)
+    navigate(routeName);
   }
 
   screen = () => {
@@ -63,7 +70,9 @@ class IndexScreen extends Component {
         renderNavigationView={() => <SideMenu closeDrawer={this.closeDrawer} />}
       >
         <View style={styles.container}>
+          <RootNavigator.Provider value={{ rootNavigator: this.rootNavigator }}>
             {this.screen()}
+          </RootNavigator.Provider>
         </View>
       </DrawerLayoutAndroid>
     )
@@ -76,4 +85,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(IndexScreen);
+export default IndexScreen;

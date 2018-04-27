@@ -75,7 +75,7 @@ class SideMenu extends Component {
               </Text>
             </View>
           </TouchableNativeFeedback>
-          <TouchableNativeFeedback>
+          <TouchableNativeFeedback onPress={() => navigate('PersonalHomepage')}>
             <View style={styles.option}>
               <Icon name="map" size={18} color="#999" />
               <Text style={styles.menu}>
