@@ -1,4 +1,4 @@
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 import {
   Favorites,
   IndexScreen,
@@ -11,7 +11,7 @@ import {
   Following,
 } from './src/screens';
 
-export default StackNavigator({
+export default createStackNavigator({
   MainScreen: {
     screen: IndexScreen,
     navigationOptions: {

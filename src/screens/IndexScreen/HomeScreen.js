@@ -2,24 +2,22 @@ import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { PostCard, BusinessCard } from '../../containers';
 import { Refresh } from '../../components';
-import { RootNavigator } from '../../context'
+// import { RootNavigator } from '../../context'
 
 class HomeScreen extends Component {
   render() {
+    const { rootNavigator } = this.props;
+    
     return (
       <View style={{ flex: 1, zIndex: 1 }}>
         <ScrollView style={styles.container} key="1">
-          <RootNavigator.Consumer>
-            {
-              ({ rootNavigator }) => (
-                <TouchableWithoutFeedback onPress={() => rootNavigator('PersonalHomepage')}>
-                  <View>
-                    <BusinessCard />
-                  </View>
-                </TouchableWithoutFeedback>
-              )
-            }
-          </RootNavigator.Consumer>
+     
+          <TouchableWithoutFeedback onPress={() => rootNavigator('PersonalHomepage')}>
+            <View>
+              <BusinessCard />
+            </View>
+          </TouchableWithoutFeedback>
+
           <PostCard />
           <PostCard />
           <PostCard />

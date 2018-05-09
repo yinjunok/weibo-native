@@ -15,7 +15,7 @@ class MainHeader extends Component {
       openDrawer,
       navigation,
       jumpToIndex,
-      index
+      page
     } = this.props;
 
     return (
@@ -24,7 +24,7 @@ class MainHeader extends Component {
         <View style={styles.menuContainer}>
           <TouchableOpacity activeOpacity={.5} onPress={() => jumpToIndex(0)}>
             <View style={styles.menu}>
-              <Text style={[styles.menuText, index === 0 && styles.active]}>
+              <Text style={[styles.menuText, page === 0 && styles.active]}>
                 首页
               </Text>
             </View>
@@ -32,7 +32,7 @@ class MainHeader extends Component {
 
           <TouchableOpacity activeOpacity={.5} onPress={() => jumpToIndex(1)}>
             <View style={styles.menu}>
-              <Text style={[styles.menuText, index === 1 && styles.active]}>
+              <Text style={[styles.menuText, page === 1 && styles.active]}>
                 发现
               </Text>
             </View>
@@ -40,7 +40,7 @@ class MainHeader extends Component {
 
           <TouchableOpacity activeOpacity={.5} onPress={() => jumpToIndex(2)}>
             <View style={styles.menu}>
-              <Text style={[styles.menuText, index === 2 && styles.active]}>
+              <Text style={[styles.menuText, page === 2 && styles.active]}>
                 消息
               </Text>
             </View>
