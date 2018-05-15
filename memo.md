@@ -18,7 +18,7 @@ https://reactnativecode.com/show-floating-action-button-above-listview/
 
 ## Text 边距的问题
 
-```js
+```jsx
 <View style={{ padding: 15 }}>
   <Text>
     多行文字多行文

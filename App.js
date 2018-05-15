@@ -9,6 +9,7 @@ import {
   EditPost,
   PostDetails,
   Following,
+  Login,
 } from './src/screens';
 
 export default createStackNavigator({
@@ -45,4 +46,12 @@ export default createStackNavigator({
   Following: {
     screen: Following,
   },
+  Login: {
+    screen: Login,
+    navigationOptions: {
+      header: null,
+    }
+  },
+}, {
+  initialRouteName: 'Login'
 });

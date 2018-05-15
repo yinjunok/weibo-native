@@ -46,35 +46,7 @@ class IndexScreen extends Component {
       page: nativeEvent.position
     })
   }
-
-  // screen = () => {
-  //   const InnerNavigator = TabNavigator({
-  //     Home: {
-  //       screen: HomeScreen,
-  //     },
-  //     Discovery: {
-  //       screen: DiscoveryScreen,
-  //     },
-  //     Message: {
-  //       screen: MessageScreen,
-  //     },
-  //   }, {
-  //     tabBarComponent: props => {
-  //       const { navigationState: { index }, jumpToIndex } = props;
-  //       return (
-  //         <MainHeader
-  //           index={index}
-  //           openDrawer={this.openDrawer}
-  //           jumpToIndex={jumpToIndex}
-  //           openDrawer={this.openDrawer}
-  //         />
-  //       )
-  //     },
-  //   });
-    
-  //   return <InnerNavigator />
-  // }
-
+  
   render () {
     const {
       page,
