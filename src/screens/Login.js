@@ -5,7 +5,7 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  TouchableNativeFeedback,
+  TouchableOpacity,
 } from 'react-native';
 
 class Login extends Component {
@@ -21,19 +21,23 @@ class Login extends Component {
           <TextInput
             secureTextEntry
             placeholder="请输入密码"
-            underlineColorAndroid="#fff"
+            underlineColorAndroid="transparent"
             style={[styles.input, styles.password, {marginTop: 20}]} />
-          <TouchableNativeFeedback>
+          <TouchableOpacity activeOpacity={.7}>
             <View style={styles.button}>
               <Text style={styles.buttonText}>登陆</Text>
             </View>
-          </TouchableNativeFeedback>
+          </TouchableOpacity>
         </View>
-        <TouchableNativeFeedback>
+
+        <TouchableOpacity 
+          activeOpacity={.7}
+          onPress={() => this.props.navigation.navigate('Registered')}
+        >
           <View style={styles.registered}>
             <Text style={styles.registeredText}>注册账号</Text>
           </View>
-        </TouchableNativeFeedback>
+        </TouchableOpacity>
       </View>
     );
   }

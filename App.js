@@ -10,6 +10,7 @@ import {
   PostDetails,
   Following,
   Login,
+  Registered,
 } from './src/screens';
 
 export default createStackNavigator({
@@ -52,6 +53,12 @@ export default createStackNavigator({
       header: null,
     }
   },
+  Registered: {
+    screen: Registered,
+    navigationOptions: {
+      title: '注册'
+    }
+  }
 }, {
   initialRouteName: 'Login'
 });

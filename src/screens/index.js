@@ -8,3 +8,4 @@ export { default as DraftBox } from './DraftBox';
 export { default as EditPost } from './EditPost';
 export { default as Following } from './Following';
 export { default as Login } from './Login';
+export { default as Registered } from './Registered';
