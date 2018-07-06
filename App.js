@@ -1,4 +1,7 @@
+import React from 'react';
+import axios from 'axios';
 import { createStackNavigator } from 'react-navigation';
+import { Provider } from 'react-redux';
 import {
   Favorites,
   IndexScreen,
@@ -12,8 +15,9 @@ import {
   Login,
   Registered,
 } from './src/screens';
+import store from './src/models';
 
-export default createStackNavigator({
+const Inner = createStackNavigator({
   MainScreen: {
     screen: IndexScreen,
     navigationOptions: {
@@ -62,3 +66,18 @@ export default createStackNavigator({
 }, {
   initialRouteName: 'Login'
 });
+
+export default class Shell extends React.Component {
+  constructor(props) {
+    super(props);
+
+    axios.defaults.baseURL = 'http://172.16.63.85:7001';
+  }
+  render() {
+    return (
+      <Provider store={store}>
+        <Inner />
+      </Provider>
+    );
+  }
+}
