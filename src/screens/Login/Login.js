@@ -3,13 +3,11 @@ import { post } from 'axios';
 import {
   View,
   Text,
-  Animated,
   TouchableOpacity,
 } from 'react-native';
 import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
-import { NamedTextInput } from '../../components';
+import { NamedTextInput, Spinner } from '../../components';
 
 class Login extends Component {
   state = {
@@ -18,7 +16,7 @@ class Login extends Component {
     message: '',
     error: false,
     showMessage: false,
-    sending: true,
+    sending: false,
   }
 
   submit = async () => {
@@ -78,7 +76,11 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    
+    setTimeout(() => {
+      this.setState({
+        sending: true,
+      });
+    }, 2000);
   }
 
   render() {
@@ -119,7 +121,7 @@ class Login extends Component {
             <View style={[styles.button, sending && styles.disabled]}>
               {
                 sending
-                  ? <Icon name="spinner" color="#fff" size={25} />
+                  ? <Spinner />
                   : <Text style={styles.buttonText}>登陆</Text>
               }
             </View>

@@ -29,3 +29,8 @@ https://reactnativecode.com/show-floating-action-button-above-listview/
 
 对拥有多行的 Text 组件, 使用 padding, margin 不管是在 Text 组件上, 还是在包裹它的 View 组件上使用, 
 会出现还有空余容纳文字的情况下, 文字折行.
+
+## RN 动画
+http://tw93.com/2016-06-05/thinking-about-react-native-animated.html  
+https://stackoverflow.com/questions/37445090/react-native-how-do-you-animate-the-rotation-of-an-image  
+https://medium.com/react-native-training/react-native-animations-using-the-animated-api-ebe8e0669fae  
