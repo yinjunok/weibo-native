@@ -34,7 +34,7 @@ Avatar.propTypes = {
 
 Avatar.defaultProps = {
   size: 60,
-  uri: 'https://blog.ayanami.ws/avatar.png',
+  uri: 'https://weibo-dev.oss-cn-beijing.aliyuncs.com/avatar.png',
   onPress: () => {}
 }
 

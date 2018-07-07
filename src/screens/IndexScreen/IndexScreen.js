@@ -7,12 +7,12 @@ import {
   ViewPagerAndroid,
   DrawerLayoutAndroid,
 } from 'react-native';
+import { connect } from 'react-redux';
 // import { TabNavigator  } from 'react-navigation';
 import HomeScreen from './HomeScreen';
 import MessageScreen from './MessageScreen';
 import DiscoveryScreen from './DiscoveryScreen';
-import { MainHeader, SideMenu, PostCard } from '../../containers';
-// import { RootNavigator } from '../../context';
+import { MainHeader, SideMenu } from '../../containers';
 
 class IndexScreen extends Component {
   constructor(props) {
@@ -22,6 +22,14 @@ class IndexScreen extends Component {
     this.state = {
       page: 0
     }
+  }
+
+  componentDidUpdate() {
+    console.log(this.props.userInfo);
+  }
+
+  componentDidMount() {
+    console.log(this.props.userInfo);
   }
 
   openDrawer = () => {
@@ -71,7 +79,6 @@ class IndexScreen extends Component {
             ref={this.pager}
             style={styles.viewPager}
             onPageSelected={this.pageChange}
-            // onPageScroll={this.pageChange}
           >
             <View style={styles.pageStyle} key="1">
               <HomeScreen rootNavigator={this.rootNavigator} />
@@ -101,4 +108,8 @@ const styles = StyleSheet.create({
   }
 });
 
-export default IndexScreen;
+const mapState = ({ userInfo }) => ({
+  userInfo,
+});
+
+export default connect(mapState)(IndexScreen);

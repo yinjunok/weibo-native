@@ -3,6 +3,7 @@ import { post } from 'axios';
 import {
   View,
   Text,
+  AsyncStorage,
   TouchableOpacity,
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -17,6 +18,14 @@ class Login extends Component {
     error: false,
     showMessage: false,
     sending: false,
+  }
+
+  componentDidUpdate() {
+    const { userInfo } = this.props;
+
+    if (userInfo !== null && userInfo.token) {
+      this.props.navigation.navigate('MainScreen');
+    }
   }
 
   submit = async () => {
@@ -54,7 +63,9 @@ class Login extends Component {
           showMessage: true,
           sending: false,
           message: data.message,
-        })
+        });
+        this.props.saveUserInfo(data.data);
+        this.props.navigation.navigate('MainScreen');
       }
     } catch (err) {
       this.setState({
@@ -73,14 +84,6 @@ class Login extends Component {
     this.setState({
       [type]:  text,
     });
-  }
-
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({
-        sending: true,
-      });
-    }, 2000);
   }
 
   render() {
@@ -145,8 +148,8 @@ const mapState = ({ userInfo }) => ({
   userInfo,
 });
 
-const mapDispatch = ({userInfo: { setUserInfo }}) => ({
-  setUserInfo,
+const mapDispatch = ({userInfo: { saveUserInfo }}) => ({
+  saveUserInfo,
 });
 
 export default connect(

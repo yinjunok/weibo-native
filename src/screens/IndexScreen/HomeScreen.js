@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { PostCard, BusinessCard } from '../../containers';
 import { Refresh } from '../../components';
-// import { RootNavigator } from '../../context'
+import Spinner from 'react-native-spinkit';
 
 class HomeScreen extends Component {
   render() {
@@ -11,7 +11,7 @@ class HomeScreen extends Component {
     return (
       <View style={{ flex: 1, zIndex: 1 }}>
         <ScrollView style={styles.container} key="1">
-     
+          <Spinner />
           <TouchableWithoutFeedback onPress={() => rootNavigator('PersonalHomepage')}>
             <View>
               <BusinessCard />
