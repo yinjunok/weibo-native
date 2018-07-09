@@ -25,11 +25,11 @@ class IndexScreen extends Component {
   }
 
   componentDidUpdate() {
-    console.log(this.props.userInfo);
+    // console.log(this.props.userInfo);
   }
 
   componentDidMount() {
-    console.log(this.props.userInfo);
+    // console.log(this.props.userInfo);
   }
 
   openDrawer = () => {

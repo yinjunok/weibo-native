@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { post } from 'axios';
+import { isEmail, isEmpty } from 'validator';
 import { NamedTextInput } from '../components';
 
 class Registered extends Component {
@@ -15,13 +16,15 @@ class Registered extends Component {
     nickname: '',
     password: '',
     passwordRepeat: '',
-    message: '一条消息',
-    success: true,
+    message: '',
+    showMessage: false,
+    error: false,
   }
 
   inputChange = (text, type) => {
     this.setState({
       [type]: text,
+      showMessage: false,
     });
   }
 
@@ -32,31 +35,79 @@ class Registered extends Component {
       password,
       passwordRepeat,
     } = this.state;
+
+    if (!isEmail(email)) {
+      this.setState({
+        showMessage: true,
+        message: '邮箱格式不正确',
+        error: true,
+      });
+      return;
+    }
+
+    if (isEmpty(nickname)) {
+      this.setState({
+        showMessage: true,
+        message: '昵称不能为空',
+        error: true,
+      });
+      return;
+    }
+
+    if(password.length < 6) {
+      this.setState({
+        showMessage: true,
+        message: '密码长度不能小于六位',
+        error: true,
+      });
+      return;
+    }
+    
+    if (password !== passwordRepeat) {
+      this.setState({
+        showMessage: true,
+        message: '两次密码输入不一致',
+        error: true,
+      });
+      return;
+    }
+
     try {
-      let result = await post('/api/v1/registered', {
+      let res = await post('/api/v1/registered', {
         email,
         nickname,
         password,
         password_repeat: passwordRepeat,
       });
-      console.log(result);
+      if (res.error_code !== 0) {
+        this.setState({
+          showMessage: true,
+          message: res.message,
+          error: true,
+        });
+      } else {
+        this.setState({
+          showMessage: true,
+          message: res.message,
+          error: false,
+        });
+        setTimeout(() => {
+          this.props.navigation.navigate('Login');
+        }, 2500);
+      }
     } catch (err) {
-      console.log(err);
+      // pass
     }
   }
 
-  jump = () => {
-    this.props.navigation.navigate('Registered')
-  }
-
   render() {
-    const { message, success } = this.state;
+    const { message, error, showMessage } = this.state;
     return (
       <View style={styles.container}>
         <View>
           {
-            message 
-              && <Text style={[styles.message, success ? styles.messageSuccess : styles.messageError]}>
+            showMessage 
+              && <Text style={[styles.message, error ? styles.messageError : styles.messageSuccess]}>
                   {message}
                  </Text>
           }

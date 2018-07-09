@@ -1,4 +1,7 @@
-import { createStackNavigator } from 'react-navigation';
+import {
+  createStackNavigator,
+  createSwitchNavigator,
+} from 'react-navigation';
 import {
   Favorites,
   IndexScreen,
@@ -11,54 +14,68 @@ import {
   Following,
   Login,
   Registered,
+  AuthLoading,
 } from './screens';
 
-export default Navigation = createStackNavigator({
-  MainScreen: {
-    screen: IndexScreen,
-    navigationOptions: {
-      header: null,
+const App = createStackNavigator(
+  {
+    MainScreen: {
+      screen: IndexScreen,
+      navigationOptions: {
+        header: null,
+      }
+    },
+    PostDetails: {
+      screen: PostDetails,
+    },
+    PersonalHomepage: {
+      screen: PersonalHomepage,
+    },
+    Favorites: {
+      screen: Favorites,
+    },
+    PersonalSetting: {
+      screen: PersonalSetting,
+    },
+    SystemSetting: {
+      screen: SystemSetting,
+    },
+    DraftBox: {
+      screen: DraftBox,
+    },
+    EditPost: {
+      screen: EditPost,
+    },
+    PostDetails: {
+      screen: PostDetails,
+    },
+    Following: {
+      screen: Following,
+    },
+    Login: {
+      screen: Login,
+      navigationOptions: {
+        header: null,
+      }
+    },
+    Registered: {
+      screen: Registered,
+      navigationOptions: {
+        title: '注册'
+      }
     }
-  },
-  PostDetails: {
-    screen: PostDetails,
-  },
-  PersonalHomepage: {
-    screen: PersonalHomepage,
-  },
-  Favorites: {
-    screen: Favorites,
-  },
-  PersonalSetting: {
-    screen: PersonalSetting,
-  },
-  SystemSetting: {
-    screen: SystemSetting,
-  },
-  DraftBox: {
-    screen: DraftBox,
-  },
-  EditPost: {
-    screen: EditPost,
-  },
-  PostDetails: {
-    screen: PostDetails,
-  },
-  Following: {
-    screen: Following,
-  },
-  Login: {
-    screen: Login,
-    navigationOptions: {
-      header: null,
-    }
-  },
-  Registered: {
-    screen: Registered,
-    navigationOptions: {
-      title: '注册'
-    }
+  }, 
+  {
+    initialRouteName: 'MainScreen',
   }
-}, {
-  initialRouteName: 'MainScreen',
-});
+);
+
+export default Navigation = createSwitchNavigator(
+  {
+    AuthLoading: AuthLoading,
+    App: App,
+  },
+  {
+    initialRouteName: 'AuthLoading',
+  }
+);

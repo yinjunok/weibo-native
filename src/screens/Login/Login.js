@@ -3,12 +3,12 @@ import { post } from 'axios';
 import {
   View,
   Text,
-  AsyncStorage,
   TouchableOpacity,
 } from 'react-native';
 import { connect } from 'react-redux';
+import Spinner from 'react-native-spinkit';
 import styles from './styles';
-import { NamedTextInput, Spinner } from '../../components';
+import { NamedTextInput } from '../../components';
 
 class Login extends Component {
   state = {
@@ -20,13 +20,13 @@ class Login extends Component {
     sending: false,
   }
 
-  componentDidUpdate() {
-    const { userInfo } = this.props;
+  // componentDidUpdate() {
+  //   const { userInfo } = this.props;
 
-    if (userInfo !== null && userInfo.token) {
-      this.props.navigation.navigate('MainScreen');
-    }
-  }
+  //   if (userInfo !== null && userInfo.token) {
+  //     this.props.navigation.navigate('MainScreen');
+  //   }
+  // }
 
   submit = async () => {
     const { username, password } = this.state;
@@ -45,26 +45,25 @@ class Login extends Component {
     });
 
     try {
-      const { data } = await post('/api/v1/login', {
+      const res = await post('/api/v1/login', {
         username,
         password
       });
-
-      if (data.error_code !== 0) {
+      if (res.error_code !== 0) {
         this.setState({
           error: true,
           showMessage: true,
           sending: false,
-          message: data.message,
+          message: res.message,
         });
       } else {
         this.setState({
           error: false,
           showMessage: true,
           sending: false,
-          message: data.message,
+          message: res.message,
         });
-        this.props.saveUserInfo(data.data);
+        this.props.saveUserInfo(res.data);
         this.props.navigation.navigate('MainScreen');
       }
     } catch (err) {
@@ -80,8 +79,6 @@ class Login extends Component {
   inputChange = (text, type) => {
     this.setState({
       showMessage: false,
-    });
-    this.setState({
       [type]:  text,
     });
   }
@@ -124,7 +121,7 @@ class Login extends Component {
             <View style={[styles.button, sending && styles.disabled]}>
               {
                 sending
-                  ? <Spinner />
+                  ? <Spinner color="#fff" size={28} type="Circle" />
                   : <Text style={styles.buttonText}>登陆</Text>
               }
             </View>

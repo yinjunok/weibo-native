@@ -9,3 +9,4 @@ export { default as EditPost } from './EditPost';
 export { default as Following } from './Following';
 export { default as Login } from './Login/Login';
 export { default as Registered } from './Registered';
+export { default as AuthLoading } from './AuthLoading';

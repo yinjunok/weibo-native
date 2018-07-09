@@ -33,4 +33,8 @@ https://reactnativecode.com/show-floating-action-button-above-listview/
 ## RN 动画
 http://tw93.com/2016-06-05/thinking-about-react-native-animated.html  
 https://stackoverflow.com/questions/37445090/react-native-how-do-you-animate-the-rotation-of-an-image  
-https://medium.com/react-native-training/react-native-animations-using-the-animated-api-ebe8e0669fae  
+https://medium.com/react-native-training/react-native-animations-using-the-animated-api-ebe8e0669fae
+
+## 载入动画组件  
+https://github.com/ybq/Android-SpinKit  
+https://github.com/maxs15/react-native-spinkit
