@@ -9,38 +9,41 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { withNavigation } from 'react-navigation';
 import { Avatar } from '../components';
 
-class MainHeader extends Component {
+class IndexHeader extends Component {
+  componentDidMount() {
+    console.log(this.props);
+  }
+
   render() {
     const {
-      openDrawer,
       navigation,
-      jumpToIndex,
-      page
+      jumpIndex,
+      index
     } = this.props;
 
     return (
       <View style={styles.container}>
-        <Avatar size={40} onPress={openDrawer} />
+        <Avatar size={40} onPress={() => navigation.toggleDrawer()} />
         <View style={styles.menuContainer}>
-          <TouchableOpacity activeOpacity={.5} onPress={() => jumpToIndex(0)}>
+          <TouchableOpacity activeOpacity={.5} onPress={() => jumpIndex(0)}>
             <View style={styles.menu}>
-              <Text style={[styles.menuText, page === 0 && styles.active]}>
+              <Text style={[styles.menuText, index === 0 && styles.active]}>
                 首页
               </Text>
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity activeOpacity={.5} onPress={() => jumpToIndex(1)}>
+          <TouchableOpacity activeOpacity={.5} onPress={() => jumpIndex(1)}>
             <View style={styles.menu}>
-              <Text style={[styles.menuText, page === 1 && styles.active]}>
+              <Text style={[styles.menuText, index === 1 && styles.active]}>
                 发现
               </Text>
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity activeOpacity={.5} onPress={() => jumpToIndex(2)}>
+          <TouchableOpacity activeOpacity={.5} onPress={() => jumpIndex(2)}>
             <View style={styles.menu}>
-              <Text style={[styles.menuText, page === 2 && styles.active]}>
+              <Text style={[styles.menuText, index === 2 && styles.active]}>
                 消息
               </Text>
             </View>
@@ -89,4 +92,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withNavigation(MainHeader);
+export default withNavigation(IndexHeader);

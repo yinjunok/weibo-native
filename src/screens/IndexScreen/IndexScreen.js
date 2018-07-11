@@ -1,113 +1,64 @@
-import React, { Component, createRef, createContext } from 'react';
+import React, { Component, createRef } from 'react';
 import {
   View,
   StyleSheet,
-  ViewPagerAndroid,
-  DrawerLayoutAndroid,
 } from 'react-native';
-import { connect } from 'react-redux';
-// import { createDrawerNavigator  } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation';
+import { TabView, SceneMap } from 'react-native-tab-view';
 import HomeScreen from './HomeScreen';
 import MessageScreen from './MessageScreen';
 import DiscoveryScreen from './DiscoveryScreen';
-import { MainHeader, SideMenu } from '../../containers';
+import { IndexHeader, SideMenu } from '../../containers';
 
 class IndexScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.drawer = createRef();
-    this.pager = createRef();
-    this.state = {
-      page: 0
-    }
+  state = {
+    index: 0,
   }
 
-  componentDidUpdate() {
-    // console.log(this.props.userInfo);
-  }
+  routes = [
+    { key: 'HomeScreen' },
+    { key: 'DiscoveryScreen' },
+    { key: 'MessageScreen' },
+  ];
 
-  componentDidMount() {
-    // console.log(this.props.userInfo);
-  }
+  jumpIndex = (index) => this.setState({ index })
 
-  openDrawer = () => {
-    this.drawer.current.openDrawer();
-  }
+  renderTabBar = () => (
+    <IndexHeader
+      index={this.state.index}
+      jumpIndex={this.jumpIndex}
+    />
+  )
 
-  closeDrawer = () => {
-    this.drawer.current.closeDrawer();
-  }
-
-  rootNavigator = (routeName) => {
-    const { navigate } = this.props.navigation;
-    navigate(routeName);
-  }
-
-  jumpToIndex = (index) => {
-     this.pager.current.setPage(index);
-  }
-
-  pageChange = ({ nativeEvent }) => {
-    this.setState({
-      page: nativeEvent.position
-    })
-  }
-  
   render () {
-    const {
-      page,
-    } = this.state;
+    const navigationState = {
+      index: this.state.index, 
+      routes: this.routes
+    };
 
     return (
-      <DrawerLayoutAndroid
-        drawerWidth={280}
-        ref={this.drawer}
-        drawerPosition={DrawerLayoutAndroid.positions.Left}
-        renderNavigationView={() => <SideMenu closeDrawer={this.closeDrawer} />}
-      >
-        <View style={styles.container}>
-          <MainHeader
-            page={page}
-            openDrawer={this.openDrawer}
-            jumpToIndex={this.jumpToIndex}
-            openDrawer={this.openDrawer}
-          />
-          <ViewPagerAndroid
-            initialPage={0}
-            ref={this.pager}
-            style={styles.viewPager}
-            onPageSelected={this.pageChange}
-          >
-            <View style={styles.pageStyle} key="1">
-              <HomeScreen rootNavigator={this.rootNavigator} />
-            </View>
-            <View style={styles.pageStyle} key="2">
-              <DiscoveryScreen />
-            </View>
-            <View style={styles.pageStyle} key="3">
-              <MessageScreen />
-            </View>
-          </ViewPagerAndroid>
-        </View>
-      </DrawerLayoutAndroid>
+      <TabView
+        navigationState={navigationState}
+        renderScene={SceneMap({
+          HomeScreen: HomeScreen,
+          DiscoveryScreen: DiscoveryScreen,
+          MessageScreen: MessageScreen,
+        })}
+        onIndexChange={this.jumpIndex}
+        renderTabBar={this.renderTabBar}
+      />
     )
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+export default createDrawerNavigator(
+  {
+    IndexScreen: {
+      screen: IndexScreen
+    }
   },
-  viewPager: {
-    flex: 1
-  },
-  pageStyle: {
-    alignItems: 'center',
+  {
+    drawerWidth: 280,
+    contentComponent: (props) => <SideMenu {...props} />
   }
-});
-
-const mapState = ({ userInfo }) => ({
-  userInfo,
-});
-
-export default connect(mapState)(IndexScreen);
+);

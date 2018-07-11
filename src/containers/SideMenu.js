@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
-  Image,
   Switch,
   StyleSheet,
   ScrollView,
-  TouchableNativeFeedback,
+  TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { withNavigation } from 'react-navigation';
+import { SafeAreaView } from 'react-navigation';
 import { Avatar, Divider } from '../components';
 
 class SideMenu extends Component {
@@ -19,6 +18,7 @@ class SideMenu extends Component {
 
     return (
       <ScrollView style={styles.container}>
+         <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
         <View style={styles.card}>
           <Avatar onPress={openDrawer} />
           <Text style={styles.name}>
@@ -35,60 +35,60 @@ class SideMenu extends Component {
         </View>
         <Divider />
         <View>
-          <TouchableNativeFeedback onPress={() => navigate('PersonalSetting')}>
+          <TouchableOpacity activeOpacity={.7} onPress={() => navigate('PersonalSetting')}>
             <View style={styles.option}>
               <Icon name="mode-edit" size={18} color="#999" />
               <Text style={styles.menu}>
                 个人设置
               </Text>
             </View>
-          </TouchableNativeFeedback>
-          <TouchableNativeFeedback onPress={() => navigate('Favorites')}>
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={.7} onPress={() => navigate('Favorites')}>
             <View style={styles.option}>
               <Icon name="grade" size={18} color="#999" />
               <Text style={styles.menu}>
                 收藏夹
               </Text>
             </View>
-          </TouchableNativeFeedback>
-          <TouchableNativeFeedback onPress={() => navigate('DraftBox')}>
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={.7} onPress={() => navigate('DraftBox')}>
             <View style={styles.option}>
               <Icon name="folder" size={18} color="#999" />
               <Text style={styles.menu}>
                 草稿箱
               </Text>
             </View>
-          </TouchableNativeFeedback>
-          <TouchableNativeFeedback onPress={() => navigate('SystemSetting')}>
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={.7} onPress={() => navigate('SystemSetting')}>
             <View style={styles.option}>
               <Icon name="build" size={18} color="#999" />
               <Text style={styles.menu}>
                 系统设置
               </Text>
             </View>
-          </TouchableNativeFeedback>
-          <TouchableNativeFeedback onPress={() => navigate('Following')}>
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={.7} onPress={() => navigate('Following')}>
             <View style={styles.option}>
               <Icon name="person-pin" size={18} color="#999" />
               <Text style={styles.menu}>
                 关注的人
               </Text>
             </View>
-          </TouchableNativeFeedback>
-          <TouchableNativeFeedback onPress={() => navigate('PersonalHomepage')}>
+          </TouchableOpacity>
+          <TouchableOpacity activeOpacity={.7} onPress={() => navigate('PersonalHomepage')}>
             <View style={styles.option}>
               <Icon name="map" size={18} color="#999" />
               <Text style={styles.menu}>
                 周边动态
               </Text>
             </View>
-          </TouchableNativeFeedback>
+          </TouchableOpacity>
         </View>
         
         <Divider />
 
         <View>
-          <TouchableNativeFeedback>
+          <TouchableOpacity activeOpacity={.7}>
             <View style={styles.themes}>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Icon name="wb-sunny" size={18} color="#999" />
@@ -99,8 +99,9 @@ class SideMenu extends Component {
               
               <Switch />
             </View>
-          </TouchableNativeFeedback>
+          </TouchableOpacity>
         </View>
+        </SafeAreaView>
       </ScrollView>
     )
   } 
@@ -152,4 +153,4 @@ const styles = StyleSheet.create({
 
 
 
-export default withNavigation(SideMenu);
+export default SideMenu;
