@@ -1,14 +1,12 @@
 import React, { Component, createRef, createContext } from 'react';
 import {
   View,
-  Text,
-  Button,
   StyleSheet,
   ViewPagerAndroid,
   DrawerLayoutAndroid,
 } from 'react-native';
 import { connect } from 'react-redux';
-// import { TabNavigator  } from 'react-navigation';
+// import { createDrawerNavigator  } from 'react-navigation';
 import HomeScreen from './HomeScreen';
 import MessageScreen from './MessageScreen';
 import DiscoveryScreen from './DiscoveryScreen';

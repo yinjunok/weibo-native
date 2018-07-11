@@ -73,22 +73,22 @@ class Registered extends Component {
     }
 
     try {
-      let res = await post('/api/v1/registered', {
+      let { data } = await post('/api/v1/registered', {
         email,
         nickname,
         password,
         password_repeat: passwordRepeat,
       });
-      if (res.error_code !== 0) {
+      if (data.error_code !== 0) {
         this.setState({
           showMessage: true,
-          message: res.message,
+          message: data.message,
           error: true,
         });
       } else {
         this.setState({
           showMessage: true,
-          message: res.message,
+          message: data.message,
           error: false,
         });
         setTimeout(() => {

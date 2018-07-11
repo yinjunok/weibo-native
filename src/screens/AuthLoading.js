@@ -9,12 +9,9 @@ class AuthLoading extends Component {
   }
 
   init = async () => {
-
     try {
-      await AsyncStorage.removeItem('userInfo');
       let result = await AsyncStorage.getItem('userInfo');
       result = JSON.parse(result);
-
       if (result && result.token) {
         this.props.setUserInfo(result);
         this.props.navigation.navigate('MainScreen');

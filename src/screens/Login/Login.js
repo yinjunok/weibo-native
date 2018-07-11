@@ -20,14 +20,6 @@ class Login extends Component {
     sending: false,
   }
 
-  // componentDidUpdate() {
-  //   const { userInfo } = this.props;
-
-  //   if (userInfo !== null && userInfo.token) {
-  //     this.props.navigation.navigate('MainScreen');
-  //   }
-  // }
-
   submit = async () => {
     const { username, password } = this.state;
 
@@ -45,26 +37,29 @@ class Login extends Component {
     });
 
     try {
-      const res = await post('/api/v1/login', {
+      const { data } = await post('/api/v1/login', {
         username,
         password
       });
-      if (res.error_code !== 0) {
+      console.log(data);
+      if (data.error_code !== 0) {
         this.setState({
           error: true,
           showMessage: true,
           sending: false,
-          message: res.message,
+          message: data.message,
         });
       } else {
         this.setState({
           error: false,
           showMessage: true,
           sending: false,
-          message: res.message,
+          message: data.message,
         });
-        this.props.saveUserInfo(res.data);
-        this.props.navigation.navigate('MainScreen');
+        this.props.saveUserInfo(data.data);
+        setTimeout(() => {
+          this.props.navigation.navigate('MainScreen');
+        }, 2500);
       }
     } catch (err) {
       this.setState({
@@ -90,6 +85,7 @@ class Login extends Component {
       error,
       sending,
     } = this.state;
+
     return (
       <View style={styles.container}>
         <View style={styles.inputArea}>
