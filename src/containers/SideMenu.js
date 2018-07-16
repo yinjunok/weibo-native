@@ -9,12 +9,27 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { SafeAreaView } from 'react-navigation';
+import { connect } from 'react-redux';
 import { Avatar, Divider } from '../components';
 
 class SideMenu extends Component {
+  
+  loginOut = async () => {
+    try {
+      this.props.navigation.navigate('Login');
+      await this.props.clearUserInfo();
+    } catch (err) {
+      // pass
+    }
+  }
+
   render() {
     const { navigate } = this.props.navigation;
-    const { openDrawer } = this.props;
+    const { openDrawer, userInfo } = this.props;
+
+    if (userInfo === null) {
+      return null;
+    }
 
     return (
       <ScrollView style={styles.container}>
@@ -22,16 +37,16 @@ class SideMenu extends Component {
         <View style={styles.card}>
           <Avatar onPress={openDrawer} />
           <Text style={styles.name}>
-            @Ayanami
+            {userInfo.nickname}
           </Text>
           <View style={{ paddingRight: 12 }}>
             <Text style={styles.intro}>
-            《新世纪福音战士》简称《EVA》，
-              是日本GAINAX制作的原创电视动画作品，
-              由庵野秀明导演，共26话，于1995年在东京电视网首次播放。
+              {userInfo.personal_intro}
             </Text>
           </View>
-          <Text style={styles.follow}>13 正在关注 0 关注着</Text>
+          <Text style={styles.follow}>
+            {userInfo.follow_amount} 正在关注 {userInfo.fans_amount} 关注者
+          </Text>
         </View>
         <Divider />
         <View>
@@ -75,14 +90,14 @@ class SideMenu extends Component {
               </Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={.7} onPress={() => navigate('PersonalHomepage')}>
+          {/* <TouchableOpacity activeOpacity={.7} onPress={() => navigate('PersonalHomepage')}>
             <View style={styles.option}>
               <Icon name="map" size={18} color="#999" />
               <Text style={styles.menu}>
                 周边动态
               </Text>
             </View>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         
         <Divider />
@@ -98,6 +113,17 @@ class SideMenu extends Component {
               </View>
               
               <Switch />
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity activeOpacity={.7} onPress={this.loginOut}>
+            <View style={styles.themes}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Icon name="exit-to-app" size={18} color="#999" />
+                <Text style={styles.menu}>
+                  退出
+                </Text>
+              </View>
             </View>
           </TouchableOpacity>
         </View>
@@ -151,6 +177,15 @@ const styles = StyleSheet.create({
   }
 });
 
+const mapState = ({ userInfo }) => ({
+  userInfo
+});
 
+const mapDispatch = ({ userInfo: { clearUserInfo } }) => ({
+  clearUserInfo,
+});
 
-export default SideMenu;
+export default connect(
+  mapState,
+  mapDispatch,
+)(SideMenu);

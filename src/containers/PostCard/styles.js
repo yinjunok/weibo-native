@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import {
+  StyleSheet
+} from 'react-native';
 
 
 const styles = StyleSheet.create({
@@ -34,12 +36,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingBottom: 3,
   },
-  icon: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
+  operatingInner: {
     borderRightWidth: 1,
     borderColor: '#eee',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  operatingWrap: {
+    flex: 1,
+    justifyContent: 'center',
   },
   iconNoBorder: {
     borderRightWidth: 0,

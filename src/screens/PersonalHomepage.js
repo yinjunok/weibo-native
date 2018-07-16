@@ -11,7 +11,6 @@ import { PostCard, BusinessCard } from '../containers';
 class PersonalHomepage extends Component {
   static navigationOptions = {
     title: '个人主页',
-    header: null,
   }
 
   render() {

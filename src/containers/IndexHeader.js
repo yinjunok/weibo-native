@@ -11,7 +11,7 @@ import { Avatar } from '../components';
 
 class IndexHeader extends Component {
   componentDidMount() {
-    console.log(this.props);
+    // console.log(this.props);
   }
 
   render() {
@@ -23,7 +23,10 @@ class IndexHeader extends Component {
 
     return (
       <View style={styles.container}>
-        <Avatar size={40} onPress={() => navigation.toggleDrawer()} />
+        <TouchableOpacity activeOpacity={.7} onPress={() => navigation.toggleDrawer()}>
+          <Avatar size={40} />
+        </TouchableOpacity>
+
         <View style={styles.menuContainer}>
           <TouchableOpacity activeOpacity={.5} onPress={() => jumpIndex(0)}>
             <View style={styles.menu}>
@@ -44,7 +47,7 @@ class IndexHeader extends Component {
           <TouchableOpacity activeOpacity={.5} onPress={() => jumpIndex(2)}>
             <View style={styles.menu}>
               <Text style={[styles.menuText, index === 2 && styles.active]}>
-                消息
+                私信
               </Text>
             </View>
           </TouchableOpacity>
@@ -84,11 +87,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   menuText: {
-    fontSize: 16,
-    color: '#666',
+    fontSize: 14,
+    color: '#607D8B',
   },
   active: {
-    color: 'blue',
+    color: '#263238',
+    fontSize: 18,
   }
 });
 

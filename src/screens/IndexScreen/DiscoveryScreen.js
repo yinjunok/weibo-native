@@ -8,6 +8,7 @@ class DiscoveryScreen extends Component {
     return (
       <View style={{ flex: 1 }}>
         <ScrollView style={{ flex: 1 }}>
+          {/* <PostCard />
           <PostCard />
           <PostCard />
           <PostCard />
@@ -15,8 +16,7 @@ class DiscoveryScreen extends Component {
           <PostCard />
           <PostCard />
           <PostCard />
-          <PostCard />
-          <PostCard />
+          <PostCard /> */}
         </ScrollView>
         <Refresh />
       </View>

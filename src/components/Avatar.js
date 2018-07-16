@@ -11,17 +11,14 @@ class Avatar extends Component {
     const {
       size,
       uri,
-      onPress,
     } = this.props;
 
     return (
-      <TouchableOpacity onPress={onPress} style={{ overflow: 'hidden' }} activeOpacity={.7}>
-        <View style={{ width: size, height: size, borderRadius: size, overflow: 'hidden' }}>
-          <Image
-            style={{ width: size, height: size }}
-            source={{ uri }} />
-        </View>
-      </TouchableOpacity>
+      <View style={{ width: size, height: size, borderRadius: size, overflow: 'hidden' }}>
+        <Image
+          style={{ width: size, height: size }}
+          source={{ uri }} />
+      </View>
     );
   }
 }
@@ -29,13 +26,11 @@ class Avatar extends Component {
 Avatar.propTypes = {
   size: PropTypes.number,
   uri: PropTypes.string,
-  onPress: PropTypes.func,
 }
 
 Avatar.defaultProps = {
   size: 60,
-  uri: 'https://weibo-dev.oss-cn-beijing.aliyuncs.com/avatar.png',
-  onPress: () => {}
+  uri: 'https://weibo-dev.oss-cn-beijing.aliyuncs.com/default-images/avatar-default.png',
 }
 
 export default Avatar;

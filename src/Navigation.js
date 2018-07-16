@@ -46,9 +46,6 @@ const App = createStackNavigator(
     EditPost: {
       screen: EditPost,
     },
-    PostDetails: {
-      screen: PostDetails,
-    },
     Following: {
       screen: Following,
     },

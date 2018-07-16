@@ -19,7 +19,7 @@ class AuthLoading extends Component {
         this.props.navigation.navigate('Login');
       }
     } catch (err) {
-      // pass
+      // console.log(err);
     }
   }
 

@@ -2,54 +2,96 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
-  StyleSheet,
-  TouchableNativeFeedback
+  TouchableOpacity
 } from 'react-native';
+import moment from 'moment';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { withNavigation } from 'react-navigation';
 import styles from './styles';
 import { Avatar } from '../../components';
 
 class PostCard extends Component {
   render() {
+    const { data } = this.props;
+    const { navigation: { navigate } } = this.props;
+
+    if (!data) return null; 
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Avatar size={45} />
-          <View style={styles.author}>
-            <Text style={styles.name}>Ayamami</Text>
-            <Text style={styles.time}>昨天 18:20</Text>
+        <TouchableOpacity activeOpacity={.7} onPress={() => navigate('PersonalHomepage')}>
+          <View style={styles.header}>
+            <Avatar size={45} />
+            <View style={styles.author}>
+              <Text style={styles.name}>{data.author.nickname}</Text>
+              <Text style={styles.time}>{moment(data.created_at).fromNow()}</Text>
+            </View>
           </View>
-        </View>
-        <View style={styles.content}>
-          <Text style={styles.contentText}>
-            随着应用日渐庞大，你可以通过类型检查捕获大量错误。
-            对于某些应用来说，你还可以使用 Flow 或 TypeScript 
-            这样的 JavsScript 扩展来对整个应用程序进行类型检查。
-            然而即使你不用它们，React 也有一些内置的类型检查功能。
-            要检查组件的属性，你需要配置特殊的 propTypes 属性
-          </Text>
-        </View>
-        <View style={styles.operating}>
-          <View style={styles.icon}>
-            {/* <Icon name="heart-o" /> */}
-            <Icon size={18} name="heart" />
+        </TouchableOpacity>
+        
+        <TouchableOpacity activeOpacity={.7} onPress={() => navigate('PostDetails')}>
+          <View style={styles.content}>
+            <Text style={styles.contentText}>
+              {data.content}
+            </Text>
           </View>
-          <View style={styles.icon}>
-            {/* <Icon size={20} name="star" /> */}
-            <Icon size={18} name="star-o" />
-          </View>
-          <View style={styles.icon}>
-            <Icon size={18} name="comment-o" />
-            <Text style={styles.iconText}>999</Text>
-          </View>
-          <View style={[styles.icon, styles.iconNoBorder]}>
-            <Icon size={18} name="share" />
-            <Text style={styles.iconText}>999</Text>
-          </View>
+        </TouchableOpacity>
+
+       
+        
+          <View style={styles.operating}>
+          {/* 收藏 */}
+          <TouchableOpacity style={styles.operatingWrap} activeOpacity={.7}>
+            <View style={styles.operatingInner}>
+              {
+                data.collection === 0
+                  ? <Icon size={20} name="star-o" />
+                  : <Icon size={18} color="#FFD700" name="star" />
+              }
+            </View>
+          </TouchableOpacity>
+
+          {/* 点赞 */}
+          <TouchableOpacity style={styles.operatingWrap} activeOpacity={.7}>
+            <View style={styles.operatingInner}>
+              {
+                data.like === 0
+                  ? <Icon size={18} name="heart-o" /> 
+                  : <Icon size={18} color="#f00" name="heart" />
+              }
+            </View>
+          </TouchableOpacity>
+
+          {/* 评论 */}
+          <TouchableOpacity  style={styles.operatingWrap} activeOpacity={.7} onPress={() => navigate('PostDetails')}>
+            <View style={styles.operatingInner}>
+              <Icon size={18} name="comment-o" />
+              <Text style={styles.iconText}>
+                {
+                  data.reply_amount > 999 
+                  ? '999+' 
+                  : data.reply_amount
+                }
+              </Text>
+            </View>
+          </TouchableOpacity>
+
+          {/* 转发 */}
+          <TouchableOpacity style={styles.operatingWrap} activeOpacity={.7} onPress={() => navigate('EditPost')}>
+            <View style={[styles.operatingInner, styles.iconNoBorder]}>
+              <Icon size={18} name="share" />
+              <Text style={styles.iconText}>
+                {
+                  data.reference_amount > 999 
+                  ? '999+' 
+                  : data.reference_amount
+                }
+              </Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     )
   }
 }
 
-export default PostCard;
+export default withNavigation(PostCard);
