@@ -22,6 +22,8 @@ export default {
       const {
         list
       } = state;
+
+      // 去掉重复的 psot.
       const dataList = payload.data.filter((item) => {
         for (let i = 0; i < list.length; ++i) {
           if (item.id === list[i].id) {

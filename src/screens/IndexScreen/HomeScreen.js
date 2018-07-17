@@ -9,7 +9,7 @@ import {
 import { connect } from 'react-redux';
 import Spinner from 'react-native-spinkit';
 import { PostCard, BusinessCard } from '../../containers';
-import { Refresh, ListFooterComponent } from '../../components';
+import { Refresh } from '../../components';
 
 class HomeScreen extends Component {
   async componentDidMount() {

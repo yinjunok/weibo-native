@@ -7,31 +7,58 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
+import { post } from 'axios';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Divider } from '../components';
+import { Divider, NamedTextInput, Alert } from '../components';
 
 class EditPost extends Component {
   static navigationOptions = {
     title: '发表微博'
   }
 
-  componentDidMount() {
-    // console.log('navigator', navigator.geolocation.getCurrentPosition());
-    // navigator.geolocation.getCurrentPosition((...rest) => console.log(rest));
+  state = {
+    content: '',
+    sending: false,
+  }
+
+  submit = async () => {
+    const { content } = this.state;
+
+    if (!content) {
+      return;
+    }
+
+    try {
+      const res = await post('/api/v1/auth/post', {
+        content,
+      });
+
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  inputChange = (text, name) => {
+    this.setState({
+      [name]: text,
+    });
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <TextInput
+        <NamedTextInput
           autoFocus
           multiline
+          name="content"
           maxLength={150}
+          onChangeText={this.inputChange}
           style={styles.input}
-          underlineColorAndroid="transparent"
           placeholder="分享你的快乐吧~"
+          underlineColorAndroid="transparent"
         />
-        <TouchableOpacity activeOpacity={.5}>
+        <TouchableOpacity activeOpacity={.5} onPress={this.submit}>
           <View style={styles.send}>
             <Icon name="send" size={20} />
           </View>
@@ -66,13 +93,6 @@ class EditPost extends Component {
               </View>
             </TouchableOpacity>
           </ScrollView>
-      
-          <TouchableOpacity activeOpacity={.7}>
-            <View style={{ flexDirection: 'row', marginTop: 10 }}>
-              <Icon name="place" size={20} />
-              <Text>定位规划中.....</Text>
-            </View>
-          </TouchableOpacity>
         </View>
       </View>
     )

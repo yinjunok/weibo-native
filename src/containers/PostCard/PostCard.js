@@ -35,8 +35,6 @@ class PostCard extends Component {
             </Text>
           </View>
         </TouchableOpacity>
-
-       
         
           <View style={styles.operating}>
           {/* 收藏 */}
