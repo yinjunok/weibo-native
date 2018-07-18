@@ -49,6 +49,14 @@ const App = createStackNavigator(
     Following: {
       screen: Following,
     },
+  }, 
+  {
+    initialRouteName: 'MainScreen',
+  }
+);
+
+const LoginFlow = createStackNavigator(
+  {
     Login: {
       screen: Login,
       navigationOptions: {
@@ -61,9 +69,9 @@ const App = createStackNavigator(
         title: '注册'
       }
     }
-  }, 
+  },
   {
-    initialRouteName: 'MainScreen',
+    initialRouteName: 'Login',
   }
 );
 
@@ -71,6 +79,7 @@ export default Navigation = createSwitchNavigator(
   {
     AuthLoading: AuthLoading,
     App: App,
+    LoginFlow: LoginFlow,
   },
   {
     initialRouteName: 'AuthLoading',

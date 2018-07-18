@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { post } from 'axios';
 import { isEmail, isEmpty } from 'validator';
-import { NamedTextInput } from '../components';
+import { NamedTextInput, Alert } from '../components';
 
 class Registered extends Component {
 
@@ -104,12 +104,10 @@ class Registered extends Component {
     const { message, error, showMessage } = this.state;
     return (
       <View style={styles.container}>
-        <View>
+        <View style={styles.inputArea}>
           {
             showMessage 
-              && <Text style={[styles.message, error ? styles.messageError : styles.messageSuccess]}>
-                  {message}
-                 </Text>
+              && <Alert type={error ? 'error' : 'success'} message={message} />
           }
           <NamedTextInput
             name="email"
@@ -174,9 +172,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#fff',
   },
-  input: {
+  inputArea: {
     marginLeft: 30,
     marginRight: 30,
+  },
+  input: {
     marginTop: 15,
     borderWidth: 1,
     borderColor: '#eee',
@@ -184,16 +184,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
   },
-  message: {
-    textAlign: 'center',
-    fontSize: 16,
-  },
-  messageError: {
-    color: 'red',
-  },
-  messageSuccess: {
-    color: 'green',
-  }
 })
 
 export default Registered;

@@ -8,19 +8,19 @@ export default {
       axios.defaults.headers.common['Authorization'] = `Bearer ${payload.token}`;
       return payload;
     },
-    clear() {axios.defaults.headers.common['Authorization'] = '';
+    clear() {
+      axios.defaults.headers.common['Authorization'] = '';
       return null;
     }
   },
   effects: {
     async saveUserInfo(payload) {
+      this.setUserInfo(payload);
       try {
         await AsyncStorage.setItem('userInfo', JSON.stringify(payload));
       } catch (err) {
         // pass
       }
-      
-      this.setUserInfo(payload);
     },
     async clearUserInfo() {
       try {

@@ -8,7 +8,7 @@ import {
 import { connect } from 'react-redux';
 import Spinner from 'react-native-spinkit';
 import styles from './styles';
-import { NamedTextInput } from '../../components';
+import { NamedTextInput, Alert } from '../../components';
 
 class Login extends Component {
   state = {
@@ -41,7 +41,7 @@ class Login extends Component {
         username,
         password
       });
-      console.log(data);
+
       if (data.error_code !== 0) {
         this.setState({
           error: true,
@@ -59,7 +59,7 @@ class Login extends Component {
         this.props.saveUserInfo(data.data);
         setTimeout(() => {
           this.props.navigation.navigate('MainScreen');
-        }, 2500);
+        }, 2000);
       }
     } catch (err) {
       this.setState({
@@ -91,7 +91,9 @@ class Login extends Component {
         <View style={styles.inputArea}>
           {
             showMessage
-              && <Text style={[styles.message, error ? styles.error : styles.success ]}>{message}</Text>
+              &&  <View style={styles.message}>
+                    <Alert type={error ? 'error' : 'success'} message={message} />
+                  </View>
           }
           <NamedTextInput
             name="username"

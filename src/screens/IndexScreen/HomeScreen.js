@@ -46,7 +46,10 @@ class HomeScreen extends Component {
     const { indexPostList, fetchList } = this.props;
 
     // 正在载入中, 或者已经获取到全部 post, 则不执行
-    if (indexPostList.loading || indexPostList.list.length === indexPostList.total) {
+    if (
+      indexPostList.loading || 
+      indexPostList.list.length === indexPostList.total
+    ) {
       return;
     }
 

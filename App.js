@@ -13,21 +13,23 @@ export default class Shell extends Component {
     moment.locale('zh-cn'); // 初始化 moment 插件
 
     this.navigateRef = createRef();
+    
+  }
+
+  componentDidMount() {
+    setTopLevelNavigator(this.navigateRef.current);
     axios.defaults.baseURL = 'http://172.16.63.85:7001';
 
     axios.interceptors.response.use(function(response){
       return response;
     }, function(error){
+      console.log(error);
       if (error.status === 401) {
         navigate('Login');
         store.dispatch('userInfo/clearUserInfo');
       }
       return Promise.reject(error);
     });
-  }
-
-  componentDidMount() {
-    setTopLevelNavigator(this.navigateRef.current);
   }
 
   render() {

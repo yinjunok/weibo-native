@@ -8,10 +8,13 @@ export default StyleSheet.create({
   },
   inputArea: {
     marginTop: 150,
-  },
-  input: {
     marginLeft: 30,
     marginRight: 30,
+  },
+  message: {
+    marginBottom: 20,
+  },
+  input: {
     borderWidth: 1,
     borderColor: '#eee',
     borderRadius: 5,
@@ -24,8 +27,6 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#03A9F4',
-    marginLeft: 30,
-    marginRight: 30,
     marginTop: 20,
   },
   disabled: {
@@ -47,15 +48,5 @@ export default StyleSheet.create({
     fontSize: 20,
     color: '#212121',
   },
-  message: {
-    fontSize: 16,
-    textAlign: 'center',
-    marginBottom: 15,
-  },
-  error: {
-    color: 'red',
-  },
-  success: {
-    color: 'green',
-  }
+
 });
