@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
   },
   content: {
     marginTop: 12,
-    marginBottom: 12,
   },
   contentText: {
     fontSize: 14,
@@ -34,6 +33,7 @@ const styles = StyleSheet.create({
   operating: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginTop: 12,
     paddingBottom: 3,
   },
   operatingInner: {
@@ -54,7 +54,16 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#999',
     marginLeft: 5,
-  }
+  },
+  referenceWrap: {
+    backgroundColor: '#ECEFF1',
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderRadius: 4,
+    marginTop: 5,
+  },
 });
 
 export default styles;

@@ -34,9 +34,22 @@ class PostCard extends Component {
               {data.content}
             </Text>
           </View>
+
+          {
+            data.reference
+              &&  <View style={styles.referenceWrap}>
+                    <Text>
+                      @{data.reference.author.nickname}: 
+                    </Text>
+                    <Text>
+                      {data.reference.content}
+                    </Text>
+                  </View>
+          }
+          
         </TouchableOpacity>
-        
-          <View style={styles.operating}>
+
+        <View style={styles.operating}>
           {/* 收藏 */}
           <TouchableOpacity style={styles.operatingWrap} activeOpacity={.7}>
             <View style={styles.operatingInner}>
