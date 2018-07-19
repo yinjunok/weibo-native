@@ -4,18 +4,13 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  ScrollView,
   TouchableOpacity,
 } from 'react-native';
 import { post } from 'axios';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import PopupDialog, { SlideAnimation } from 'react-native-popup-dialog';
-import Dialog from './Dialog';
 import { Divider, NamedTextInput, Alert } from '../../components';
-
-const slideAnimation = new SlideAnimation({
-  slideFrom: 'bottom',
-});
+import UploadImage from './UploadImage';
 
 class EditPost extends Component {
   static navigationOptions = {
@@ -30,7 +25,11 @@ class EditPost extends Component {
   }
 
   submit = async () => {
-    const { content } = this.state;
+    const { content, sending } = this.state;
+
+    if (sending) {
+      return;
+    }
 
     if (!content) {
       this.setState({
@@ -51,9 +50,8 @@ class EditPost extends Component {
           message: data.message,
         });
       } else {
-        this.setState({
-          error: false,
-        });
+        this.props.getPostList(1);
+        this.props.navigation.navigate('MainScreen');
       }
     } catch (err) {
       // console.log(err);
@@ -65,10 +63,6 @@ class EditPost extends Component {
       error: false,
       [name]: text,
     });
-  }
-
-  componentDidMount() {
-    // this.popupDialog.show();
   }
 
   render() {
@@ -84,7 +78,7 @@ class EditPost extends Component {
           error && <Alert type="error" message={message} />
         }
         <NamedTextInput
-          autoFocus
+          // autoFocus
           multiline
           name="content"
           maxLength={150}
@@ -100,32 +94,18 @@ class EditPost extends Component {
         </TouchableOpacity>
         <Divider />
 
-        <View style={styles.imgList}>
-          <ScrollView horizontal>
-            <TouchableOpacity activeOpacity={.7}>
-              <View style={styles.img}>
-                <Icon name="add" size={40} />
-              </View>
-            </TouchableOpacity>
-          </ScrollView>
-        </View>
-        <Dialog
-          visible={true}
-          transparent={true}
-        >
-          <View>
-            <Text>Hello</Text>
-          </View>
-        </Dialog>
+        <UploadImage />
       </View>
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
+    paddingTop: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
     backgroundColor: '#fff',
   },
   input: {
@@ -140,19 +120,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     paddingRight: 15
   },
-  imgList: {
-    marginBottom: 10,
-  },
-  img: {
-    width: 80,
-    height: 80,
-    marginRight: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#eee',
-    borderStyle: 'dotted',
-  }
-})
+});
 
-export default EditPost;
+const mapDispatch = ({ indexPostList: { getPostList } }) => ({
+  getPostList,
+});
+
+export default connect(
+  null,
+  mapDispatch,
+)(EditPost);

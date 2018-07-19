@@ -18,12 +18,32 @@ export default {
         loading,
       }
     },
-    setState(state, payload) {
-      const {
-        list
-      } = state;
 
-      // 去掉重复的 psot.
+    clear() {
+      return {
+        loading: true,
+        list: [],
+        page: 1,
+        total: 0,
+        limit: 20,
+      }
+    },
+
+    setList(state, payload) {
+      const { list } = state;
+      return {
+        loading: false,
+        list: payload.data,
+        page: payload.page,
+        total: payload.total,
+        limit: payload.limit,
+      }
+    },
+
+    updateList(state, payload) {
+      const { list } = state;
+
+      // 去掉重复的 post.
       const dataList = payload.data.filter((item) => {
         for (let i = 0; i < list.length; ++i) {
           if (item.id === list[i].id) {
@@ -43,22 +63,36 @@ export default {
     },
   },
   effects: {
-    async fetchList(page) {
+    async updateListFromOrigin(page) {
       this.setLoading(true);
 
       try {
-        const {
-          data
-        } = await get('/api/v1/auth/post', {
+        const { data } = await get('/api/v1/auth/post', {
           params: {
             page,
           }
         });
 
-        this.setState(data);
+        this.updateList(data);
+      } catch (err) {
+        // pass
+      }
+    },
+
+    async getPostList() {
+      this.clear();
+
+      try {
+        const { data } = await get('/api/v1/auth/post', {
+          params: {
+            page: 1,
+          }
+        });
+
+        this.setList(data);
       } catch (err) {
         // pass
       }
     }
-  }
+  },
 }

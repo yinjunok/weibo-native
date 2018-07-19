@@ -4425,6 +4425,10 @@ react-native-drawer-layout@1.3.2:
   dependencies:
     react-native-dismiss-keyboard "1.0.0"
 
+react-native-image-crop-picker@^0.20.3:
+  version "0.20.3"
+  resolved "http://registry.npm.taobao.org/react-native-image-crop-picker/download/react-native-image-crop-picker-0.20.3.tgz#565d69c1764e96abef23871fe4d6d58b1ee35e18"
+
 react-native-popup-dialog@^0.14.52:
   version "0.14.52"
   resolved "http://registry.npm.taobao.org/react-native-popup-dialog/download/react-native-popup-dialog-0.14.52.tgz#451562a73038da9f6a5277b2c563a13b112d90c0"

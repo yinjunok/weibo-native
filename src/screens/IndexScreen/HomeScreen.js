@@ -14,7 +14,7 @@ import { Refresh } from '../../components';
 class HomeScreen extends Component {
   async componentDidMount() {
     try {
-      await this.props.fetchList(1);
+      await this.props.getPostList(1);
     } catch (err) {
       // pass
     }
@@ -43,7 +43,7 @@ class HomeScreen extends Component {
   }
 
   updateList = () => {
-    const { indexPostList, fetchList } = this.props;
+    const { indexPostList, updateListFromOrigin } = this.props;
 
     // 正在载入中, 或者已经获取到全部 post, 则不执行
     if (
@@ -53,7 +53,7 @@ class HomeScreen extends Component {
       return;
     }
 
-    fetchList(indexPostList.page + 1);
+    updateListFromOrigin(indexPostList.page + 1);
   }
 
   render() {
@@ -99,8 +99,9 @@ const mapState = ({ indexPostList }) => ({
   indexPostList,
 });
 
-const mapDispatch = ({ indexPostList: { fetchList } }) => ({
-  fetchList,
+const mapDispatch = ({ indexPostList: { getPostList, updateListFromOrigin } }) => ({
+  getPostList,
+  updateListFromOrigin,
 });
 
 export default connect(
