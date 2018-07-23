@@ -2,7 +2,7 @@ import React, { Component, createRef } from 'react';
 import {
   View,
   Text,
-  Animated,
+  Image,
   ScrollView,
   StyleSheet,
   Dimensions,
@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ImagePicker from 'react-native-image-crop-picker';
+import { post } from 'axios';
+import { ExtendModal } from '../../components';
 
 const { width: winWidth } = Dimensions.get('window');
 
@@ -17,7 +19,11 @@ class UploadImage extends Component {
   constructor() {
     super();
     this.state = {
-      bottom: new Animated.Value(-150),
+      images: [],
+      modalVisible: false,
+      imgSize: {
+        width: 100,
+      }
     };
   }
 
@@ -27,8 +33,13 @@ class UploadImage extends Component {
       height: 400,
       cropping: true
     }).then(image => {
-      console.log(image);
+      this.uploadImage(image);
+     // console.log(image);
+      this.setState({
+        images: this.state.images.concat(image),
+      });
     });
+    this.closePick();
   }
 
   pickByCamera = () => {
@@ -37,58 +48,110 @@ class UploadImage extends Component {
       height: 400,
       cropping: true
     }).then(image => {
-      console.log(image);
+      this.uploadImage(image);
+     // console.log(image);
     });
+    this.closePick();
   }
 
   pickImage = () => {
-    Animated.timing(this.state.bottom, {
-      toValue: 0,
-      duration: 1000,
-    }).start();
+    this.setState({
+      modalVisible: true,
+    });
   }
 
   closePick = () => {
-    Animated.timing(this.state.bottom, {
-      toValue: -150,
-      duration: 1000,
-    }).start();
+    this.setState({
+      modalVisible: false,
+    });
+  }
+
+  onLayout = (e) => {
+    const { width } = e.nativeEvent.layout;
+    
+    this.setState({
+      imgSize: {
+        width: width / 3,
+      }
+    });
+  }
+
+  uploadImage = async (image) => {
+    const photo = new FormData();
+
+    photo.append('photo', {
+      uri: image.path,
+      name: 'a.jpg',
+      filename: 'a.jpg',
+      type: image.mime,
+    });
+
+    try {
+      const { data } = await post(
+        '/api/v1/auth/images?type=photo',
+        photo,
+        {
+          headers: {
+            'Content-Type':'multipart/form-data',
+          }
+        }
+      );
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   render() {
+    const { bottom, images, imgSize, modalVisible } = this.state;
+
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1 }} onLayout={this.onLayout}>
         <View style={styles.imgList}>
-          <ScrollView horizontal>
-            <TouchableOpacity activeOpacity={.7} onPress={this.pickImage}>
-              <View style={styles.img}>
-                <Icon name="add" size={40} />
-              </View>
-            </TouchableOpacity>
-          </ScrollView>
+          {
+            images.map((image, i) => (
+              <Image
+                key={image.path}
+                style={{
+                  width: imgSize.width,
+                  height: imgSize.width,
+                }}
+                source={{uri: image.path}}
+              />
+            ))
+          }
+          {
+            images.length < 9 && 
+              <TouchableOpacity activeOpacity={.7} onPress={this.pickImage}>
+                <View style={[styles.addImg, { width: imgSize.width, height: imgSize.width }]}>
+                  <Icon name="add" size={imgSize.width / 2} />
+                </View>
+              </TouchableOpacity>
+          }
         </View>
         
-        <Animated.View style={[styles.pickType, {bottom: this.state.bottom}]}>
-          <TouchableOpacity activeOpacity={1} onPress={this.closePick}>
-            <View style={{ height: 150, }}>
-              <View style={styles.pick}>
-                <TouchableOpacity activeOpacity={.7} onPress={this.pickByGallery}>
-                  <View style={styles.pickText}>
-                    <Icon name="photo" size={80} color="#37474F" />
-                    <Text>从相册中选择</Text>
-                  </View>
-                </TouchableOpacity>
+        <ExtendModal
+          position='bottom'
+          visible={modalVisible}
+        >
+          <View style={styles.pickType}>
+            <View style={styles.pick}>
+              <TouchableOpacity activeOpacity={.7} onPress={this.pickByGallery}>
+                <View style={styles.pickText}>
+                  <Icon name="photo" size={80} color="#37474F" />
+                  <Text>从相册中选择</Text>
+                </View>
+              </TouchableOpacity>
 
-                <TouchableOpacity activeOpacity={.7} onPress={this.pickByCamera}>
-                  <View style={styles.pickText}>
-                    <Icon name="photo-camera" size={80} color="#37474F" />
-                    <Text>现场拍一张</Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
+              <TouchableOpacity activeOpacity={.7} onPress={this.pickByCamera}>
+                <View style={styles.pickText}>
+                  <Icon name="photo-camera" size={80} color="#37474F" />
+                  <Text>现场拍一张</Text>
+                </View>
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
-        </Animated.View>
+          </View>
+        </ExtendModal>
       </View>
     );
   }
@@ -97,28 +160,23 @@ class UploadImage extends Component {
 const styles = StyleSheet.create({
   imgList: {
     marginBottom: 10,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-start',
   },
-  img: {
-    width: 80,
-    height: 80,
-    marginRight: 10,
+  addImg: {
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
     borderColor: '#eee',
     borderStyle: 'dotted',
+    alignSelf: 'flex-start',
   },
   pickType: {
     height: 150,
     width: winWidth,
-    left: -10,
-    position: 'absolute',
     backgroundColor: '#ECEFF1',
-  },
-  pickCloseBtn: {
-    position: 'absolute',
-    top: 10,
-    left: 10,
+    zIndex: 10,
   },
   pick: {
     flex: 1,
